@@ -2,7 +2,7 @@ const express = require('express');
 
 const ctrl = require('../../controllers/auth');
 
-const { bodyValidator, userIdValidator, authentificator } = require('../../middlewares');
+const { bodyValidator, userIdValidator, authentificator, upload } = require('../../middlewares');
 
 const { schemas } = require('../../models/user');
 
@@ -17,9 +17,11 @@ router.get('/current', authentificator, ctrl.getCurrentUser);
 router.post('/logout', authentificator, ctrl.logoutUser);
 
 router.patch(
-  "/:id/subscription",
+  '/:id/subscription',
   authentificator,
   userIdValidator, ctrl.updateSubscriptionUser
 );
+
+router.patch('/avatars', authentificator, upload.single('avatar'), ctrl.updateUserAvatar);
 
 module.exports = router;
