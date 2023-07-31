@@ -11,23 +11,27 @@ const userSchema = new Schema(
     password: {
       type: String,
       minlength: 6,
-      required: [true, "Password is required"],
+      required: [true, 'Password is required'],
     },
     email: {
       type: String,
       match: emailRegexp,
       unique: true,
-      required: [true, "Email is required"],
+      required: [true, 'Email is required'],
     },
     subscription: {
       type: String,
-      enum: ["starter", "pro", "business"],
-      default: "starter",
+      enum: ['starter', 'pro', 'business'],
+      default: 'starter',
     },
     token: {
       type: String,
-      default: "",
+      default: '',
     },
+    avatarURL: {
+      type: String,
+      required: true,
+    }
   },
   { versionKey: false, timestamps: true }
 );
